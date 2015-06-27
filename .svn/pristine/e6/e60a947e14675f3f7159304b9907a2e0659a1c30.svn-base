@@ -1,0 +1,11 @@
+// finish (and comment) me!
+
+package snapshop.gui;
+
+public class SnapShopGUI
+{
+  public void start()
+  {
+    javax.swing.JOptionPane.showMessageDialog(null, "SnapShop placeholder");
+  }
+}

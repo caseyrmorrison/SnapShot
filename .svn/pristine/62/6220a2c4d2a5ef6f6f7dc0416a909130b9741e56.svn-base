@@ -1,0 +1,55 @@
+/*
+ * TCSS 305 - Assignment 3: SnapShop
+ */
+
+//import javax.swing.UIManager;
+//import javax.swing.UIManager.LookAndFeelInfo;
+
+import snapshop.gui.SnapShopGUI;
+
+/**
+ * Runs SnapShop by instantiating and starting the SnapShopGUI.
+ * 
+ * @author Marty Stepp
+ * @author Daniel M. Zimmerman
+ * @author Alan Fowler
+ * @version Spring 2013
+ */
+public final class SnapShopMain
+{
+
+  /**
+   * Private constructor, to prevent instantiation of this class.
+   */
+  private SnapShopMain()
+  {
+    throw new IllegalStateException();
+  }
+
+  /**
+   * The main method, invokes the SnapShop GUI. Command line arguments are
+   * ignored.
+   * 
+   * @param the_args Command line arguments.
+   */
+  public static void main(final String[] the_args)
+  {
+    
+    //code to change the look-and-feel to nimbus
+    
+//    try {
+//      for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//        if ("Nimbus".equals(info.getName())) {
+//          UIManager.setLookAndFeel(info.getClassName());
+//          break;
+//        }
+//      }
+//    } catch (final Exception e) {
+//        // If Nimbus is not available, you can set the GUI to another look and feel.
+//    }
+    
+    
+    final SnapShopGUI gui = new SnapShopGUI();
+    gui.start();
+  }
+}

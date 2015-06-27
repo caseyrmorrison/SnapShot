@@ -1,0 +1,134 @@
+/*
+ * SnapShop program
+ * TCSS 305 4/30/13
+ */
+
+package snapshop.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+/**
+ * 
+ *
+ *
+ * @author Casey Morrison
+ * @version April 30, 2013
+ */
+@SuppressWarnings("serial")
+public class SnapShopGUI extends JFrame {
+  
+  private static final Icon OPEN = new ImageIcon("Open16.gif");
+  
+  private static final Icon SAVE_AS = new ImageIcon("Save16.gif");
+  
+  private static final Icon CLOSE = new ImageIcon("close.gif");
+  
+  /** The number of buttons to create. */
+  public static final int NUM_BUTTONS = 7;
+  
+  /** List of names of the filters for the buttons. */
+  private final List<String> my_filters = new ArrayList<String>();
+  
+   /**
+   * Constructs a frame to demonstrate composite layout.
+   */
+  public SnapShopGUI() {
+    super("TCSS 305 SnapShop - Spring 2013");
+    my_filters.add("Edge Detect");
+    my_filters.add("Edge Highlight"); 
+    my_filters.add("Flip Horizontal");
+    my_filters.add("Flip Vertical");
+    my_filters.add("Grayscale");
+    my_filters.add("Sharpen");
+    my_filters.add("Soften");
+    //start();
+  }
+  
+  /**
+   * Sets up and displays the GUI for this application.
+   */
+  public void start() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLocationRelativeTo(null);
+    setupComponents();  
+    pack();
+    
+    setVisible(true);
+  }
+  
+  /**
+   * Sets up the components in this frame.
+   */
+  private void setupComponents() {
+    final JPanel master_panel = new JPanel(new BorderLayout());
+    final JPanel north_panel = new JPanel(new FlowLayout());
+    final JPanel center_panel = new JPanel();
+    final JPanel south_panel = new JPanel(new FlowLayout());
+ 
+    for (int i = 0; i < NUM_BUTTONS; i++) {
+      north_panel.add(createButton(my_filters.get(i)));
+    }
+    
+    final JButton open = new JButton("Open...", OPEN);
+    open.addActionListener(new ActionListener() { 
+      public void actionPerformed(final ActionEvent the_event) {
+        final JFileChooser file_chooser = new JFileChooser();
+        final int result = file_chooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+          final String file_name = file_chooser.getSelectedFile().toString();
+          System.out.println("You chose file " + file_name);
+        }
+      }
+    });
+    south_panel.add(open);
+    
+    final JButton save = new JButton("Save As...", SAVE_AS);
+    save.setEnabled(false);
+    south_panel.add(save);
+    
+    final JButton close = new JButton("Close Image", CLOSE);
+    close.setEnabled(true);
+    south_panel.add(close);
+
+    master_panel.add(north_panel, BorderLayout.NORTH);
+    master_panel.add(south_panel, BorderLayout.SOUTH);
+
+    add(master_panel);
+  }
+  
+   /**
+   * Creates a single button that calls a method on the specified object when
+   * pressed.
+   * 
+   * @param the_name The name of the filter.
+   * @return the button.
+   */
+  private JButton createButton(final String the_name) {
+    final JButton button = new JButton(the_name);
+    button.setEnabled(false);
+    button.addActionListener(new ActionListener() { 
+      public void actionPerformed(final ActionEvent the_event) {
+        System.err.println(the_event);
+      }
+    });
+
+    return button;
+  }
+}
